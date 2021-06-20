@@ -31,7 +31,7 @@ func ArchiveTar(src string) (dst string) {
 	fmt.Println(gocolor.ColorString("Generating tar...", "green", "italic"))
 	y, m, d := time.Now().Date()
 	h, min, sec := time.Now().Clock()
-	dst = fmt.Sprintf("backup_%v-%v-%v_%v:%v:%v.tar", d, m, y, h, min, sec)
+	dst = fmt.Sprintf("backup_%v-%v-%v_%v-%v-%v.tar", d, m, y, h, min, sec)
 	dir, err := os.Open(src)
 	CheckErr(err)
 	defer dir.Close()
