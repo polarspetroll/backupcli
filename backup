@@ -1,0 +1,47 @@
+#!/usr/bin/env bash
+
+DIR=$1
+BACKUPDIR="/home/$(whoami)"
+
+if [[ "$DIR" == "--help" || "$DIR" == "-h" || "$DIR" ==  "" ]]
+then
+  echo -e "\n\e[1;96m Usage : \n\tbackup [Directory](Final destination)\n"
+  echo -e "\e[1;32m\tDefault destination: $BACKUPDIR \n"
+  exit
+elif [ -d $DIR ]
+then
+  echo ""
+else
+  echo -e "\e[1;31m$DIR - No such directory"
+  exit
+fi
+
+if [ -d $2 ]
+then
+  BACKUPDIR=$2
+  if [ "$BACKUPDIR" == "" ]
+  then
+    BACKUPDIR="/home/$(whoami)"
+  fi
+  echo -e "\e[0;34mFinale Destination : \e[0m$BACKUPDIR (y/n):"
+  read ANS
+  if [ "$ANS" != "y" ]
+  then
+    echo -e "\e[1;31mAbort"
+    exit
+  fi
+  echo -e "\e[1;33mCompressing..."
+else
+  echo -e "\e[1;31m$2 - No such file or directory"
+  exit
+fi
+
+FBASE=$(basename -- "$DIR")
+FNAME="${FBASE%.*}"
+FILEDATE=$(date +"Backup_%d_%B_%Y_")
+DSTNAME="$FILEDATE$FNAME.tar.gz"
+
+
+tar -zcvf "$BACKUPDIR/$DSTNAME" $DIR
+
+echo -e "\e[1;32mDone! Saved at $BACKUPDIR/$DSTNAME"

@@ -1,21 +1,21 @@
-# gbackup
+# backupcli
 
 CLI backup tool
 
 #### Usage :
-
 ```
-gbackup Directory
+Usage :
+        backup [Directory](Final destination)
+
+        Default destination: /home/username/
 ```
 
-eg : ```gbackup Downloads```
 
 #### Installation :
-```
-git clone https://github.com/polarspetroll/gbackup.git
-cd gbackup
-go build -o gbackup main.go
-sudo mv gbackup /usr/local/bin
-```
 
-- Make sure to add the final destination (main.go:17) 
+```bash
+git clone https://github.com/polarspetroll/backupcli.git
+cd backupcli
+chmod +x backup
+sudo mv backup /usr/local/bin/
+```
